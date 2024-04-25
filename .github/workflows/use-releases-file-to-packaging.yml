@@ -200,7 +200,7 @@ on:
         options:
           - ophub
           - angel
-          - Steven Ye
+          - Steven_Ye
 
 env:
   TZ: America/New_York
