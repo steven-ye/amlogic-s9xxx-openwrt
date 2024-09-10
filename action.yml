@@ -25,7 +25,7 @@ inputs:
   openwrt_kernel:
     description: "Select kernel version."
     required: false
-    default: "6.1.1_5.15.1"
+    default: "6.1.y_5.15.y"
   auto_kernel:
     description: "Auto use the latest kernel."
     required: false
@@ -33,7 +33,7 @@ inputs:
   openwrt_size:
     description: "Set the rootfs size(Unit: MiB)."
     required: false
-    default: "1024"
+    default: ""
   builder_name:
     description: "Set OpenWrt builder signature."
     required: false
@@ -84,7 +84,7 @@ runs:
 
         cd ${GITHUB_ACTION_PATH}/${openwrt_outpath}
         # Generate a sha256sum verification file for each OpenWrt image file
-        for file in *; do [[ ! -d "${file}" ]] && sha256sum "${file}" >"${file}.sha"; done
+        for file in *; do [[ -f "${file}" ]] && sha256sum "${file}" >"${file}.sha" 2>/dev/null; done
         rm -f *.sha.sha 2>/dev/null
         sync && sleep 3
 
