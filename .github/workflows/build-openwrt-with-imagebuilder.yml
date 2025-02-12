@@ -15,7 +15,7 @@ on:
       releases_branch:
         description: "Select the releases branch"
         required: false
-        default: "openwrt:23.05.5"
+        default: "openwrt:24.10"
         type: choice
         options:
           - openwrt:24.10
@@ -191,6 +191,7 @@ on:
           - 5.15.y
           - 6.1.y
           - 6.6.y
+          - 6.6.73
           - 6.1.y_6.6.y
           - 5.15.y_5.10.y
       auto_kernel:
@@ -223,7 +224,7 @@ on:
         options:
           - ophub
           - angel
-          - yourname
+          - steven_ye
 
 env:
   TZ: America/New_York
