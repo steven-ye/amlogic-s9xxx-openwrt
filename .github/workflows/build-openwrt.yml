@@ -16,7 +16,6 @@ on:
         type: choice
         options:
           - openwrt-main
-          - openwrt-24.10
           - lede-master
           - immortalwrt-master
       openwrt_board:
@@ -292,13 +291,9 @@ jobs:
           # Set up compilation source code
           if [[ "${{ inputs.source_branch }}" == *"openwrt"* ]]; then
               REPO_URL="https://github.com/openwrt/openwrt"
-              if [[ "${{ inputs.source_branch }}" == "openwrt-24.10" ]]; then
-                  REPO_BRANCH="openwrt-24.10"
-                  TAGS_NAME="release"
-              else
-                  REPO_BRANCH="main"
-                  TAGS_NAME="official"
-              fi
+              #REPO_BRANCH="main"
+              REPO_BRANCH="openwrt-24.10"
+              TAGS_NAME="official"
           elif [[ "${{ inputs.source_branch }}" == *"lede"* ]]; then
               REPO_URL="https://github.com/coolsnowwolf/lede"
               REPO_BRANCH="master"
