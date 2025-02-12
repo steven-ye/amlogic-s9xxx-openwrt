@@ -18,6 +18,7 @@ on:
         default: "openwrt:23.05.5"
         type: choice
         options:
+          - openwrt:24.10
           - openwrt:23.05.5
           - openwrt:23.05.4
           - openwrt:23.05.3
