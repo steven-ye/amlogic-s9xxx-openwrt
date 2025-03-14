@@ -28,7 +28,7 @@ on:
       openwrt_board:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "s905l3a-cm311"
         type: choice
         options:
           - all
@@ -183,7 +183,7 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_6.6.y"
+        default: "6.6.73"
         type: choice
         options:
           - 5.4.y
@@ -225,7 +225,7 @@ on:
         options:
           - ophub
           - angel
-          - steven_ye
+          - steven
 
 env:
   TZ: America/New_York
