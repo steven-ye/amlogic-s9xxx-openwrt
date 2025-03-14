@@ -12,16 +12,17 @@ on:
       source_branch:
         description: "Select the source branch"
         required: false
-        default: "official"
+        default: "stable"
         type: choice
         options:
+          - stable
           - official
           - lede
           - immortalwrt
       openwrt_board:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "s905l3a-cm311"
         type: choice
         options:
           - all
@@ -176,7 +177,7 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_6.6.y"
+        default: "6.6.73"
         type: choice
         options:
           - 5.4.y
@@ -184,6 +185,7 @@ on:
           - 5.15.y
           - 6.1.y
           - 6.6.y
+          - 6.6.73
           - 6.1.y_6.6.y
           - 5.15.y_5.10.y
       auto_kernel:
@@ -194,9 +196,10 @@ on:
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "ophub/kernel"
+        default: "steven-ye/kernel"
         type: choice
         options:
+          - steven-ye/kernel
           - ophub/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
@@ -219,12 +222,12 @@ on:
       builder_name:
         description: "Set OpenWrt builder signature."
         required: false
-        default: "ophub"
+        default: "steven"
         type: choice
         options:
           - ophub
           - angel
-          - Steven_Ye
+          - steven
 
 env:
   TZ: America/New_York
@@ -284,16 +287,20 @@ jobs:
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           # Set up compilation source code
-          if [[ "${{ inputs.source_branch }}" == *"official"* ]]; then
-              REPO_URL="https://github.com/openwrt/openwrt"
+          if [[ "${{ inputs.source_branch }}" == *"stable"* ]]; then
+              REPO_URL="https://bgithub.xyz/openwrt/openwrt"
+              REPO_BRANCH="openwrt-24.10"
+              TAGS_NAME="stable"
+          elif [[ "${{ inputs.source_branch }}" == *"official"* ]]; then
+              REPO_URL="https://bgithub.xyz/openwrt/openwrt"
               REPO_BRANCH="main"
               TAGS_NAME="official"
           elif [[ "${{ inputs.source_branch }}" == *"lede"* ]]; then
-              REPO_URL="https://github.com/coolsnowwolf/lede"
+              REPO_URL="https://bgithub.xyz/coolsnowwolf/lede"
               REPO_BRANCH="master"
               TAGS_NAME="lede"
           elif [[ "${{ inputs.source_branch }}" == *"immortalwrt"* ]]; then
-              REPO_URL="https://github.com/immortalwrt/immortalwrt"
+              REPO_URL="https://bgithub.xyz/immortalwrt/immortalwrt"
               REPO_BRANCH="master"
               TAGS_NAME="immortalwrt"
           else
