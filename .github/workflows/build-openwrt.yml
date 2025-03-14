@@ -21,7 +21,7 @@ on:
       openwrt_board:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "s905l3a-cm311"
         type: choice
         options:
           - all
@@ -176,17 +176,11 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_6.6.y"
+        default: "6.6.73"
         type: choice
         options:
-          - 5.4.y
-          - 5.10.y
-          - 5.15.y
-          - 6.1.y
           - 6.6.y
           - 6.6.73
-          - 6.1.y_6.6.y
-          - 5.15.y_5.10.y
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
@@ -199,6 +193,7 @@ on:
         type: choice
         options:
           - ophub/kernel
+          - steven-ye/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
@@ -225,7 +220,7 @@ on:
         options:
           - ophub
           - angel
-          - Steven_Ye
+          - steven
 
 env:
   FEEDS_CONF: config/${{ inputs.source_branch }}/feeds.conf.default
@@ -290,16 +285,16 @@ jobs:
         run: |
           # Set up compilation source code
           if [[ "${{ inputs.source_branch }}" == *"openwrt"* ]]; then
-              REPO_URL="https://github.com/openwrt/openwrt"
+              REPO_URL="https://bgithub.xyz/openwrt/openwrt"
               #REPO_BRANCH="main"
               REPO_BRANCH="openwrt-24.10"
               TAGS_NAME="official"
           elif [[ "${{ inputs.source_branch }}" == *"lede"* ]]; then
-              REPO_URL="https://github.com/coolsnowwolf/lede"
+              REPO_URL="https://bgithub.xyz/coolsnowwolf/lede"
               REPO_BRANCH="master"
               TAGS_NAME="lede"
           elif [[ "${{ inputs.source_branch }}" == *"immortalwrt"* ]]; then
-              REPO_URL="https://github.com/immortalwrt/immortalwrt"
+              REPO_URL="https://bgithub.xyz/immortalwrt/immortalwrt"
               REPO_BRANCH="master"
               TAGS_NAME="immortalwrt"
           else
@@ -412,7 +407,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ### OpenWrt Image information
-            - Default IP: 192.168.1.2
+            - Default IP: 192.168.31.2
             - Default username: root
             - Default password: password
             - Default WIFI name: OpenWrt
