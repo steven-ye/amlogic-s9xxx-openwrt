@@ -288,7 +288,7 @@ jobs:
           if [[ "${{ inputs.source_branch }}" == *"openwrt-24.10"* ]]; then
               REPO_URL="https://bgithub.xyz/openwrt/openwrt"
               REPO_BRANCH="openwrt-24.10"
-              TAGS_NAME="stable"
+              TAGS_NAME="release"
           elif [[ "${{ inputs.source_branch }}" == *"openwrt-main"* ]]; then
               REPO_URL="https://bgithub.xyz/openwrt/openwrt"
               REPO_BRANCH="main"
