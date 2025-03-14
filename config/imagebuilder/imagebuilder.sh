@@ -75,12 +75,20 @@ download_imagebuilder() {
     fi
 
     # Downloading imagebuilder files
-    download_file="https://downloads.${op_sourse}.org/releases/${op_branch}/targets/${target_system}/${op_sourse}-imagebuilder-${op_branch}-${target_name}.Linux-x86_64.tar.xz"
+    if [[ "${op_branch:0:2}" -gt "23" ]]; then
+        download_file="https://downloads.${op_sourse}.org/releases/${op_branch}/targets/${target_system}/${op_sourse}-imagebuilder-${op_branch}-${target_name}.Linux-x86_64.tar.zst"
+    else
+        download_file="https://downloads.${op_sourse}.org/releases/${op_branch}/targets/${target_system}/${op_sourse}-imagebuilder-${op_branch}-${target_name}.Linux-x86_64.tar.xz"
+    fi
     curl -fsSOL ${download_file}
     [[ "${?}" -eq "0" ]] || error_msg "Download failed: [ ${download_file} ]"
 
     # Unzip and change the directory name
-    tar -xJf *-imagebuilder-* && sync && rm -f *-imagebuilder-*.tar.xz
+    if [[ "${op_branch:0:2}" -gt "23" ]]; then
+        tar --use-compress-program=unzstd -xJf rm -f *-imagebuilder-*.tar.zst
+    else
+        tar -xJf *-imagebuilder-* && sync && rm -f *-imagebuilder-*.tar.xz
+    fi
     mv -f *-imagebuilder-* ${openwrt_dir}
 
     sync && sleep 3
