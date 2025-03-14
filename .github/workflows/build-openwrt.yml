@@ -12,9 +12,10 @@ on:
       source_branch:
         description: "Select the source branch"
         required: false
-        default: "openwrt-main"
+        default: "openwrt-24.10"
         type: choice
         options:
+          - openwrt-24.10
           - openwrt-main
           - lede-master
           - immortalwrt-master
@@ -284,10 +285,13 @@ jobs:
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           # Set up compilation source code
-          if [[ "${{ inputs.source_branch }}" == *"openwrt"* ]]; then
+          if [[ "${{ inputs.source_branch }}" == *"openwrt-24.10"* ]]; then
               REPO_URL="https://bgithub.xyz/openwrt/openwrt"
-              #REPO_BRANCH="main"
               REPO_BRANCH="openwrt-24.10"
+              TAGS_NAME="stable"
+          elif [[ "${{ inputs.source_branch }}" == *"openwrt-main"* ]]; then
+              REPO_URL="https://bgithub.xyz/openwrt/openwrt"
+              REPO_BRANCH="main"
               TAGS_NAME="official"
           elif [[ "${{ inputs.source_branch }}" == *"lede"* ]]; then
               REPO_URL="https://bgithub.xyz/coolsnowwolf/lede"
