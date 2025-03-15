@@ -191,12 +191,12 @@ on:
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
-        default: true
+        default: false
         type: boolean
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "steven-ye/kernel"
+        default: "ophub/kernel"
         type: choice
         options:
           - steven-ye/kernel
@@ -288,19 +288,19 @@ jobs:
         run: |
           # Set up compilation source code
           if [[ "${{ inputs.source_branch }}" == *"stable"* ]]; then
-              REPO_URL="https://bgithub.xyz/openwrt/openwrt"
+              REPO_URL="https://github.com/openwrt/openwrt"
               REPO_BRANCH="openwrt-24.10"
               TAGS_NAME="stable"
           elif [[ "${{ inputs.source_branch }}" == *"official"* ]]; then
-              REPO_URL="https://bgithub.xyz/openwrt/openwrt"
+              REPO_URL="https://github.com/openwrt/openwrt"
               REPO_BRANCH="main"
               TAGS_NAME="official"
           elif [[ "${{ inputs.source_branch }}" == *"lede"* ]]; then
-              REPO_URL="https://bgithub.xyz/coolsnowwolf/lede"
+              REPO_URL="https://github.com/coolsnowwolf/lede"
               REPO_BRANCH="master"
               TAGS_NAME="lede"
           elif [[ "${{ inputs.source_branch }}" == *"immortalwrt"* ]]; then
-              REPO_URL="https://bgithub.xyz/immortalwrt/immortalwrt"
+              REPO_URL="https://github.com/immortalwrt/immortalwrt"
               REPO_BRANCH="master"
               TAGS_NAME="immortalwrt"
           else
@@ -363,7 +363,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ### OpenWrt Image information
-            - Default IP: 192.168.1.2
+            - Default IP: 192.168.1.1
             - Default username: root
             - Default password: password
             - Default WIFI name: OpenWrt
