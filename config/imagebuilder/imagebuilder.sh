@@ -69,7 +69,8 @@ download_imagebuilder() {
 
     # Downloading imagebuilder files
     if [[ "${op_sourse}" == "immortalwrt" ]]; then
-        download_url="immortalwrt.kyarucloud.moe"
+        # download_url="immortalwrt.kyarucloud.moe"
+        download_url="mirror.nju.edu.cn/immortalwrt"
     else
         download_url="downloads.openwrt.org"
     fi
